@@ -1,102 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Just One Question ❤️</title>
-    <style>
-        body {
-            height: 100vh;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: #ffe6eb;
-            font-family: Arial, sans-serif;
-            overflow: hidden;
-        }
+<meta charset="UTF-8">
+<title>Just One Question ❤️</title>
 
-        .box {
-            background: white;
-            padding: 35px;
-            border-radius: 25px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-        }
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(120deg, #ff9a9e, #fad0c4);
+    font-family: 'Segoe UI', sans-serif;
+}
 
-        h1 {
-            color: #ff3366;
-            margin-bottom: 10px;
-        }
+/* Floating hearts */
+.heart {
+    position: fixed;
+    bottom: -20px;
+    font-size: 20px;
+    animation: floatUp linear infinite;
+    opacity: 0.7;
+}
+@keyframes floatUp {
+    to {
+        transform: translateY(-110vh);
+        opacity: 0;
+    }
+}
 
-        img {
-            width: 220px;
-            border-radius: 15px;
-            margin-bottom: 15px;
-        }
+.box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 35px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
 
-        button {
-            padding: 12px 28px;
-            font-size: 18px;
-            border: none;
-            border-radius: 30px;
-            cursor: pointer;
-            margin: 10px;
-        }
+h1 {
+    color: #ff3366;
+    min-height: 60px;
+}
 
-        #yes {
-            background: #ff4d79;
-            color: white;
-        }
+img {
+    width: 220px;
+    border-radius: 15px;
+    margin: 10px 0;
+}
 
-        #no {
-            background: #ddd;
-            position: absolute;
-        }
-    </style>
+button {
+    padding: 12px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+#yes {
+    background: #ff3366;
+    color: white;
+}
+
+#no {
+    background: #ddd;
+    position: absolute;
+}
+</style>
 </head>
+
 <body>
 
 <div class="box">
-    <h1>💘 Simmo,Will you be my Valentine? 💘</h1>
+    <h1 id="text"></h1>
 
-    <!-- GIF -->
-    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ2lzbGZjd2NtbG00dGN3dW5mNmVjczU5Z3N4ZmZqOHV4aW5rZ3E5YiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3oriO0OEd9QIDdllqo/giphy.gif" alt="cute gif">
+    <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif">
 
     <br>
-
-    <button id="yes" onclick="yesClicked()">YES 😍</button>
+    <button id="yes">YES 😍</button>
     <button id="no">NO 😏</button>
 </div>
 
+<audio id="music" src="https://www.fesliyanstudios.com/play-mp3/387"></audio>
+
 <script>
-    const noBtn = document.getElementById("no");
+/* TYPEWRITER TEXT */
+const message = "Simmo 💖 Will you be my Valentine?";
+let i = 0;
+const textEl = document.getElementById("text");
 
-    noBtn.addEventListener("mouseover", () => {
-        const x = Math.random() * (window.innerWidth - noBtn.clientWidth);
-        const y = Math.random() * (window.innerHeight - noBtn.clientHeight);
-
-        noBtn.style.left = x + "px";
-        noBtn.style.top = y + "px";
-    });
-
-    function yesClicked() {
-        document.body.innerHTML = `
-            <div style="
-                height:100vh;
-                display:flex;
-                justify-content:center;
-                align-items:center;
-                flex-direction:column;
-                background:#ffdde1;
-                font-family:Arial;
-                text-align:center;
-            ">
-                <h1 style="color:#ff3366;">🥰 YAYYYYY! 🥰</h1>
-                <img src="https://media.giphy.com/media/l4FGI8GoTL7N4DsyI/giphy.gif" width="250">
-                <h2>You just made my day ❤️</h2>
-            </div>
-        `;
+function typeText() {
+    if (i < message.length) {
+        textEl.innerHTML += message.charAt(i);
+        i++;
+        setTimeout(typeText, 80);
     }
+}
+typeText();
+
+/* NO BUTTON RUNS */
+const noBtn = document.getElementById("no");
+
+function moveNo() {
+    const x = Math.random() * (window.innerWidth - noBtn.clientWidth);
+    const y = Math.random() * (window.innerHeight - noBtn.clientHeight);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+}
+
+noBtn.addEventListener("mouseover", moveNo);
+noBtn.addEventListener("touchstart", moveNo);
+
+/* YES CLICK */
+document.getElementById("yes").onclick = () => {
+    document.getElementById("music").play();
+
+    document.body.innerHTML = `
+        <div style="
+            height:100vh;
+            display:flex;
+            flex-direction:column;
+            justify-content:center;
+            align-items:center;
+            background:linear-gradient(120deg,#ff9a9e,#fad0c4);
+            text-align:center;
+        ">
+            <h1 style="color:#ff3366;">🥰 I KNEW IT, SIMMO 🥰</h1>
+            <img src="https://media.giphy.com/media/l4FGI8GoTL7N4DsyI/giphy.gif" width="250">
+            <h2>You just made my heart happy ❤️</h2>
+        </div>
+    `;
+};
+
+/* FLOATING HEARTS */
+setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (3 + Math.random() * 3) + "s";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 6000);
+}, 300);
 </script>
 
 </body>
