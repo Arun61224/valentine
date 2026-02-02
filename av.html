@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Just One Question ❤️</title>
+    <style>
+        body {
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ffe6eb;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+        }
+
+        .box {
+            background: white;
+            padding: 35px;
+            border-radius: 25px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        }
+
+        h1 {
+            color: #ff3366;
+            margin-bottom: 10px;
+        }
+
+        img {
+            width: 220px;
+            border-radius: 15px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 12px 28px;
+            font-size: 18px;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        #yes {
+            background: #ff4d79;
+            color: white;
+        }
+
+        #no {
+            background: #ddd;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h1>💘 Simmo,Will you be my Valentine? 💘</h1>
+
+    <!-- GIF -->
+    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExZ2lzbGZjd2NtbG00dGN3dW5mNmVjczU5Z3N4ZmZqOHV4aW5rZ3E5YiZlcD12MV9naWZzX3NlYXJjaCZjdD1n/3oriO0OEd9QIDdllqo/giphy.gif" alt="cute gif">
+
+    <br>
+
+    <button id="yes" onclick="yesClicked()">YES 😍</button>
+    <button id="no">NO 😏</button>
+</div>
+
+<script>
+    const noBtn = document.getElementById("no");
+
+    noBtn.addEventListener("mouseover", () => {
+        const x = Math.random() * (window.innerWidth - noBtn.clientWidth);
+        const y = Math.random() * (window.innerHeight - noBtn.clientHeight);
+
+        noBtn.style.left = x + "px";
+        noBtn.style.top = y + "px";
+    });
+
+    function yesClicked() {
+        document.body.innerHTML = `
+            <div style="
+                height:100vh;
+                display:flex;
+                justify-content:center;
+                align-items:center;
+                flex-direction:column;
+                background:#ffdde1;
+                font-family:Arial;
+                text-align:center;
+            ">
+                <h1 style="color:#ff3366;">🥰 YAYYYYY! 🥰</h1>
+                <img src="https://media.giphy.com/media/l4FGI8GoTL7N4DsyI/giphy.gif" width="250">
+                <h2>You just made my day ❤️</h2>
+            </div>
+        `;
+    }
+</script>
+
+</body>
+</html>
